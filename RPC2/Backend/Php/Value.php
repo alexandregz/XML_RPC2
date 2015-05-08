@@ -136,6 +136,7 @@ abstract class XML_RPC2_Backend_Php_Value extends XML_RPC2_Value
                     $explicitType = 'double';
                     break;
                 case 'string':
+                case 'NULL':    // Alexandre Espinosa Menor (2015-05-08): null values from db works without exception
                     $explicitType = 'string';
                     break;
                 case 'array':
@@ -162,7 +163,7 @@ abstract class XML_RPC2_Backend_Php_Value extends XML_RPC2_Value
                     }
                     break;
                 case 'resource':
-                case 'NULL':
+                // case 'NULL': // Alexandre Espinosa Menor (2015-05-08): commented because line 139
                 case 'unknown type':
                     throw new XML_RPC2_InvalidTypeEncodeException(sprintf('Impossible to encode value \'%s\' from type \'%s\'. No analogous type in XML_RPC.', 
                         (string) $nativeValue,
